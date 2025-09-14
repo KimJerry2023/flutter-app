@@ -153,4 +153,23 @@ class AuthService extends GetxController {
   bool isTokenValid() {
     return _token.value.isNotEmpty && _isLoggedIn.value;
   }
+  
+  /// 设置token（用于token刷新）
+  Future<void> setToken(String newToken) async {
+    _token.value = newToken;
+    
+    // 保存到本地存储
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setString('auth_token', newToken);
+    
+    // 如果设置了新token，则认为用户已登录
+    if (newToken.isNotEmpty) {
+      _isLoggedIn.value = true;
+    }
+  }
+  
+  /// 清除认证信息（用于登录过期处理）
+  Future<void> clearAuth() async {
+    await logout();
+  }
 }

@@ -1,0 +1,410 @@
+// 支持的语言类型
+enum Language {
+  zh('zh'),
+  en('en'),
+  de('de'),
+  ms('ms'),
+  zhTW('zh_TW');
+
+  const Language(this.code);
+  final String code;
+
+  static Language fromString(String code) {
+    switch (code) {
+      case 'zh':
+        return Language.zh;
+      case 'en':
+        return Language.en;
+      case 'de':
+        return Language.de;
+      case 'ms':
+        return Language.ms;
+      case 'zh_TW':
+        return Language.zhTW;
+      default:
+        return Language.en; // 默认返回英语
+    }
+  }
+}
+
+// 错误消息多语言配置
+class ErrorMessages {
+  static const Map<Language, Map<int, String>> _messages = {
+    Language.zh: {
+      -1: '未知错误',
+      -2: '服务繁忙，请稍后再试！',
+      200: '成功',
+      401: '未授权，token过期',
+      403: '请求过于频繁，请稍后再试',
+      1000: '服务器内部错误',
+      1001: '数据库错误',
+      1002: '缓存服务错误',
+      1003: '密码加密失败',
+      1004: '生成UUID失败',
+      1005: '生成Token失败',
+      1006: '生成验证码失败',
+      1007: '系统配置错误',
+      1008: '邮件服务器错误',
+      1009: '唯一索引冲突',
+      1010: '对象存储错误',
+      1011: '文件操作错误',
+      1012: 'UID生成超出限制',
+      1013: '无效的ObjectID',
+      1014: '获取实时报价失败',
+      20000: '业务错误',
+      20001: '用户不存在',
+      20002: '参数无效',
+      20003: '验证码错误',
+      20004: '邮箱已注册',
+      20005: '密码错误',
+      20006: '推荐人状态异常',
+      20007: '用户KYC已认证',
+      20008: '用户KYC状态不允许',
+      20009: '验证码发送过于频繁',
+      20010: '请先完成所有风险评估问题',
+      20011: '文档不存在',
+      20012: '股票不存在',
+      20013: '余额不足',
+      20014: '扣除金额失败',
+      20015: '股票未购买',
+      20016: '股票数量不足',
+      20017: '默认的资源未找到错误',
+      20018: '用户禁止登录',
+      20019: '用户KYC未完成',
+      20020: '用户交易被禁止',
+      20021: '股票不支持融资购买',
+      20022: '用户不允许做融资购买',
+      20023: '股票不在交易时间',
+      20024: 'ipo股票无效',
+      20025: '银行卡已存在',
+      20026: '银行卡数量过多',
+      20027: 'ipo不在认购时间',
+      20028: 'ipo数量无效',
+      20029: '交易金额过小',
+      20030: '交易金额过大',
+      20031: '不在允许的提现时间内',
+      20033: '需要先设置支付密码',
+      20034: '银行账号名称太长',
+      20035: '银行名称太长',
+      20036: '购买数量太小',
+      20037: '商品不存在',
+      20038: '订单状态无效',
+      20039: '订单对应ipoid无效',
+      20040: '购买数量过大',
+      20041: '交易金额过小',
+      20042: '股票涨停不能购买',
+      20043: '订单数量超出限制',
+      20044: '交易股数超出限制',
+    },
+    Language.en: {
+      -1: 'Unknown error',
+      -2: 'The service is busy, please try again later!',
+      200: 'Success',
+      401: 'Unauthorized, token expired',
+      403: 'Request too frequent, please try again later',
+      1000: 'Server internal error',
+      1001: 'Database error',
+      1002: 'Cache service error',
+      1003: 'Password encryption failed',
+      1004: 'UUID generation failed',
+      1005: 'Token generation failed',
+      1006: 'Verification code generation failed',
+      1007: 'System configuration error',
+      1008: 'Email server error',
+      1009: 'Unique index conflict',
+      1010: 'Object storage error',
+      1011: 'File operation error',
+      1012: 'UID generation exceeds limit',
+      1013: 'Invalid ObjectID',
+      1014: 'Failed to get real-time quotes',
+      20000: 'Business error',
+      20001: 'User does not exist',
+      20002: 'Invalid parameters',
+      20003: 'Verification code error',
+      20004: 'Email already registered',
+      20005: 'Incorrect password',
+      20006: 'Referral code error',
+      20007: 'User KYC has been verified',
+      20008: 'User KYC status not allowed',
+      20009: 'Email verification code sent too frequently',
+      20010: 'Please complete all risk assessment questions first',
+      20011: 'Document does not exist',
+      20012: 'Stock does not exist',
+      20013: 'Insufficient balance',
+      20014: 'Deduction amount failed',
+      20015: 'Stock not purchased',
+      20016: 'Insufficient stock quantity',
+      20017: 'Default resource not found error',
+      20018: 'User is prohibited from logging in',
+      20019: 'User KYC not completed',
+      20020: 'User transaction is prohibited',
+      20021: 'Stock does not support margin purchase',
+      20022: 'User is not allowed to make margin purchases',
+      20023: 'Stock not in trading hours',
+      20024: 'Invalid IPO stock',
+      20025: 'Bank card already exists',
+      20026: 'Too many bank cards',
+      20027: 'IPO not in subscription period',
+      20028: 'Invalid IPO quantity',
+      20029: 'Transaction amount too small',
+      20030: 'Transaction amount too large',
+      20031: 'Not within the allowed withdrawal time',
+      20033: 'Need to set payment password first',
+      20034: 'Bank account name is too long',
+      20035: 'Bank name is too long',
+      20036: 'Purchase quantity too small',
+      20037: 'Product does not exist',
+      20038: 'Order status invalid',
+      20039: 'Order corresponding ipoid invalid',
+      20040: 'Purchase quantity too large',
+      20041: 'Trade amount too small',
+      20042: 'Stock limit exceeded',
+      20043: 'Trade limit exceeded',
+      20044: 'Trade shares exceeded',
+    },
+    Language.de: {
+      -1: 'Unbekannter Fehler',
+      -2: 'Der Dienst ist beschäftigt, bitte versuchen Sie es später erneut!',
+      200: 'Erfolgreich',
+      401: 'Nicht autorisiert, Token abgelaufen',
+      403: 'Anfrage zu häufig, bitte versuchen Sie es später erneut',
+      1000: 'Interner Serverfehler',
+      1001: 'Datenbankfehler',
+      1002: 'Cache-Dienstfehler',
+      1003: 'Passwortverschlüsselung fehlgeschlagen',
+      1004: 'UUID-Generierung fehlgeschlagen',
+      1005: 'Token-Generierung fehlgeschlagen',
+      1006: 'Generierung des Bestätigungscodes fehlgeschlagen',
+      1007: 'Systemkonfigurationsfehler',
+      1008: 'E-Mail-Serverfehler',
+      1009: 'Eindeutiger Indexkonflikt',
+      1010: 'Objektspeicherfehler',
+      1011: 'Dateioperationsfehler',
+      1012: 'UID-Generierung überschreitet Limit',
+      1013: 'Ungültige ObjectID',
+      1014: 'Abrufen der Echtzeitkurse fehlgeschlagen',
+      20000: 'Geschäftsfehler',
+      20001: 'Benutzer existiert nicht',
+      20002: 'Ungültige Parameter',
+      20003: 'Bestätigungscodefehler',
+      20004: 'E-Mail bereits registriert',
+      20005: 'Falsches Passwort',
+      20006: 'Fehler im Empfehlungscode',
+      20007: 'Benutzer-KYC wurde verifiziert',
+      20008: 'Benutzer-KYC-Status nicht erlaubt',
+      20009: 'E-Mail-Bestätigungscode zu häufig gesendet',
+      20010: 'Bitte zuerst alle Risikoassessmentfragen beantworten',
+      20011: 'Dokument existiert nicht',
+      20012: 'Aktie existiert nicht',
+      20013: 'Unzureichender Kontostand',
+      20014: 'Abzugssumme fehlgeschlagen',
+      20015: 'Aktie nicht gekauft',
+      20016: 'Unzureichende Aktienmenge',
+      20017: 'Standardressourcen nicht gefunden',
+      20018: 'Benutzer ist vom Einloggen ausgeschlossen',
+      20019: 'Benutzer-KYC nicht abgeschlossen',
+      20020: 'Benutzertransaktion ist verboten',
+      20021: 'Aktie unterstützt keine Hebelkaufs',
+      20022: 'Benutzer ist nicht berechtigt, Hebelkäufe zu tätigen',
+      20023: 'Aktie nicht in Handelszeiten',
+      20024: 'Ungültige IPO-Aktie',
+      20025: 'Bankkarte existiert bereits',
+      20026: 'Zu viele Bankkarten',
+      20027: 'IPO nicht in Abonnementphase',
+      20028: 'Ungültige IPO-Menge',
+      20029: 'Transaktionsbetrag zu klein',
+      20030: 'Transaktionsbetrag zu groß',
+      20031: 'Nicht innerhalb der erlaubten Auszahlungszeit',
+      20033: 'Zuerst muss ein Zahlungskennwort festgelegt werden',
+      20034: 'Bankkontoname ist zu lang',
+      20035: 'Bankname ist zu lang',
+      20036: 'Kaufmenge zu klein',
+      20037: 'Produkt existiert nicht',
+      20038: 'Bestellstatus ungültig',
+      20039: 'Bestellung entspricht ungültiger ipoid',
+      20040: 'Kaufmenge zu groß',
+      20041: 'Handelsbetrag zu klein',
+      20042: 'Aktienlimit überschritten',
+      20043: 'Handelslimit überschritten',
+      20044: 'Handelsaktien überschritten',
+    },
+    Language.ms: {
+      -1: 'Ralat tidak diketahui',
+      -2: 'Perkhidmatan sibuk, sila cuba lagi kemudian!',
+      200: 'Berjaya',
+      401: 'Tidak dibenarkan, token telah tamat tempoh',
+      403: 'Permintaan terlalu kerap, sila cuba lagi kemudian',
+      1000: 'Ralat dalaman pelayan',
+      1001: 'Ralat pangkalan data',
+      1002: 'Ralat perkhidmatan cache',
+      1003: 'Pengekodan kata laluan gagal',
+      1004: 'Penjanaan UUID gagal',
+      1005: 'Penjanaan Token gagal',
+      1006: 'Penjanaan kod pengesahan gagal',
+      1007: 'Ralat konfigurasi sistem',
+      1008: 'Ralat pelayan e-mel',
+      1009: 'Konflik indeks unik',
+      1010: 'Ralat penyimpanan objek',
+      1011: 'Ralat operasi fail',
+      1012: 'Penjanaan UID melebihi had',
+      1013: 'ObjectID tidak sah',
+      1014: 'Gagal mendapatkan harga real-time',
+      20000: 'Ralat perniagaan',
+      20001: 'Pengguna tidak wujud',
+      20002: 'Parameter tidak sah',
+      20003: 'Kod pengesahan salah',
+      20004: 'E-mel telah didaftarkan',
+      20005: 'Kata laluan salah',
+      20006: 'Kod rujukan salah',
+      20007: 'Pengesahan KYC pengguna telah selesai',
+      20008: 'Status KYC pengguna tidak dibenarkan',
+      20009: 'Kod pengesahan e-mel dihantar terlalu kerap',
+      20010: 'Sila lengkapkan semua soalan penilaian risiko terlebih dahulu',
+      20011: 'Dokumen tidak wujud',
+      20012: 'Saham tidak wujud',
+      20013: 'Baki tidak mencukupi',
+      20014: 'Pembayaran jumlah gagal',
+      20015: 'Saham tidak dibeli',
+      20016: 'Kuantiti saham tidak mencukupi',
+      20017: 'Ralat sumber lalai tidak ditemui',
+      20018: 'Pengguna dilarang log masuk',
+      20019: 'KYC pengguna tidak lengkap',
+      20020: 'Transaksi pengguna dilarang',
+      20021: 'Saham tidak menyokong pembelian margin',
+      20022: 'Pengguna tidak dibenarkan membuat pembelian margin',
+      20023: 'Saham tidak dalam masa dagangan',
+      20024: 'Saham IPO tidak sah',
+      20025: 'Kad bank sudah wujud',
+      20026: 'Terlalu banyak kad bank',
+      20027: 'IPO tidak dalam tempoh langganan',
+      20028: 'Kuantiti IPO tidak sah',
+      20029: 'Jumlah transaksi terlalu kecil',
+      20030: 'Jumlah transaksi terlalu besar',
+      20031: 'Bukan dalam masa penarikan yang dibenarkan',
+      20033: 'Perlu tetapkan kata laluan pembayaran terlebih dahulu',
+      20034: 'Nama akaun bank terlalu panjang',
+      20035: 'Nama bank terlalu panjang',
+      20036: 'Kuantiti pembelian terlalu kecil',
+      20037: 'Produk tidak wujud',
+      20038: 'Status pesanan tidak sah',
+      20039: 'Pesanan sepadan dengan ipoid tidak sah',
+      20040: 'Kuantiti pembelian terlalu besar',
+      20041: 'Jumlah perdagangan terlalu kecil',
+      20042: 'Had saham telah dilampaui',
+      20043: 'Had perdagangan telah dilampaui',
+      20044: 'Bilangan saham perdagangan telah dilampaui',
+    },
+    Language.zhTW: {
+      -1: '未知錯誤',
+      -2: '服務繁忙，請稍後再試！',
+      200: '成功',
+      401: '未授權，token過期',
+      403: '請求過於頻繁，請稍後再試',
+      1000: '伺服器內部錯誤',
+      1001: '資料庫錯誤',
+      1002: '快取服務錯誤',
+      1003: '密碼加密失敗',
+      1004: '生成UUID失敗',
+      1005: '生成Token失敗',
+      1006: '生成驗證碼失敗',
+      1007: '系統設定錯誤',
+      1008: '郵件伺服器錯誤',
+      1009: '唯一索引衝突',
+      1010: '物件儲存錯誤',
+      1011: '檔案操作錯誤',
+      1012: 'UID生成超出限制',
+      1013: '無效的ObjectID',
+      1014: '取得即時報價失敗',
+      20000: '業務錯誤',
+      20001: '用戶不存在',
+      20002: '參數無效',
+      20003: '驗證碼錯誤',
+      20004: '信箱已註冊',
+      20005: '密碼錯誤',
+      20006: '推薦人狀態異常',
+      20007: '用戶KYC已認證',
+      20008: '用戶KYC狀態不允許',
+      20009: '驗證碼發送過於頻繁',
+      20010: '請先完成所有風險評估問題',
+      20011: '文件不存在',
+      20012: '股票不存在',
+      20013: '餘額不足',
+      20014: '扣除金額失敗',
+      20015: '股票未購買',
+      20016: '股票數量不足',
+      20017: '預設的資源未找到錯誤',
+      20018: '用戶禁止登入',
+      20019: '用戶KYC未完成',
+      20020: '用戶交易被禁止',
+      20021: '股票不支援融資購買',
+      20022: '用戶不允許做融資購買',
+      20023: '股票不在交易時間',
+      20024: 'ipo股票無效',
+      20025: '銀行卡已存在',
+      20026: '銀行卡數量過多',
+      20027: 'ipo不在認購時間',
+      20028: 'ipo數量無效',
+      20029: '交易金額過小',
+      20030: '交易金額過大',
+      20031: '不在允許的提現時間內',
+      20033: '需要先設定支付密碼',
+      20034: '銀行帳號名稱太長',
+      20035: '銀行名稱太長',
+      20036: '購買數量太小',
+      20037: '商品不存在',
+      20038: '訂單狀態無效',
+      20039: '訂單對應ipoid無效',
+      20040: '購買數量過大',
+      20041: '交易金額過小',
+      20042: '股票漲停不能購買',
+      20043: '訂單數量超出限制',
+      20044: '交易股數超出限制',
+    },
+  };
+
+  /// 获取指定语言的错误消息
+  static String getMessage(int code, Language language) {
+    return _messages[language]?[code] ?? 
+           _messages[Language.en]?[code] ?? 
+           'Unknown error';
+  }
+
+  /// 获取所有支持的语言
+  static List<Language> getSupportedLanguages() {
+    return Language.values;
+  }
+}
+
+/// 获取错误消息的全局函数
+/// 
+/// [code] - 错误代码
+/// [locale] - 可选的语言代码，如果不提供将尝试从系统获取
+/// 
+/// 注意：由于原代码中引用了 uni.useAuthStore.locale，
+/// 这里需要根据你的实际项目结构来获取当前语言设置
+String getErrorMessage(int code, [String? locale]) {
+  Language lang = Language.en; // 默认语言
+  
+  // 如果提供了locale参数，使用它
+  if (locale != null) {
+    lang = Language.fromString(locale);
+  } else {
+    // TODO: 这里需要根据你的项目实际情况来获取当前语言
+    // 例如：从SharedPreferences、Provider、Bloc等状态管理中获取
+    // 示例：
+    // final authService = GetIt.instance<AuthService>();
+    // lang = Language.fromString(authService.currentLocale ?? 'en');
+    
+    // 或者从系统语言获取
+    // import 'dart:ui' as ui;
+    // final systemLocale = ui.window.locale.languageCode;
+    // lang = Language.fromString(systemLocale);
+  }
+  
+  // 检查是否为系统错误码范围 (1000-19999)
+  if (code > 999 && code < 20000) {
+    return ErrorMessages.getMessage(-2, lang);
+  }
+  
+  return ErrorMessages.getMessage(code, lang);
+}

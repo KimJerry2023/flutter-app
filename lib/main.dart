@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'services/auth_service.dart';
+import 'services/request_service.dart';
 import 'pages/login_page.dart';
 import 'widgets/layout.dart';
 
@@ -11,10 +12,11 @@ void main() {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    // Get.put() - 依赖注入：将AuthService实例注册到GetX的依赖注入容器中
+    // Get.put() - 依赖注入：将服务实例注册到GetX的依赖注入容器中
     // 这样在整个应用中都可以通过Get.find()来获取这个实例
-    // 相当于单例模式，确保整个应用只有一个AuthService实例
+    // 相当于单例模式，确保整个应用只有一个服务实例
     Get.put(AuthService());
+    Get.put(RequestService());
     
     // GetMaterialApp - GetX提供的MaterialApp替代品
     // 它包含了MaterialApp的所有功能，并添加了GetX的路由管理功能
