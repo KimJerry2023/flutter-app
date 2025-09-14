@@ -34,7 +34,11 @@ class AuthService extends GetxController {
   }
   
   // 加载本地存储的认证数据
+  // Future<void> - 异步方法，返回一个Future对象，表示一个可能在未来完成的操作
+  // async关键字使方法可以执行异步操作，如文件I/O、网络请求等
   Future<void> _loadAuthData() async {
+    // await关键字用于等待异步操作完成
+    // SharedPreferences.getInstance()返回Future<SharedPreferences>，需要等待获取实例
     final prefs = await SharedPreferences.getInstance();
     final token = prefs.getString('auth_token') ?? '';
     final username = prefs.getString('username') ?? '';
@@ -49,9 +53,13 @@ class AuthService extends GetxController {
   }
   
   // 登录
+  // Future<bool> - 异步方法，返回Future<bool>，表示登录操作的结果（成功/失败）
+  // 调用者可以使用await等待结果，或使用.then()处理结果
   Future<bool> login(String username, String password) async {
     try {
       // 模拟登录API调用
+      // Future.delayed() - 创建一个延迟的Future，用于模拟网络请求的延迟
+      // 在实际应用中，这里应该是真实的HTTP API调用
       await Future.delayed(Duration(seconds: 1));
       
       // 简单的验证逻辑（实际项目中应该调用真实的API）
@@ -60,6 +68,7 @@ class AuthService extends GetxController {
         final token = 'token_${DateTime.now().millisecondsSinceEpoch}';
         
         // 保存到本地存储
+        // SharedPreferences的setString方法返回Future<bool>，表示保存操作是否成功
         final prefs = await SharedPreferences.getInstance();
         await prefs.setString('auth_token', token);
         await prefs.setString('username', username);
@@ -74,15 +83,20 @@ class AuthService extends GetxController {
       }
       return false;
     } catch (e) {
+      // 异常处理 - 如果异步操作中发生异常，会被catch块捕获
+      // 这确保了方法总是返回一个值，而不是抛出异常
       print('登录失败: $e');
       return false;
     }
   }
   
   // 注册
+  // Future<bool> - 异步方法，返回Future<bool>，表示注册操作的结果（成功/失败）
+  // 与login方法类似，但包含额外的密码确认验证
   Future<bool> register(String username, String password, String confirmPassword) async {
     try {
       // 模拟注册API调用
+      // Future.delayed() - 模拟网络延迟，实际应用中替换为真实的API调用
       await Future.delayed(Duration(seconds: 1));
       
       // 简单的验证逻辑
@@ -91,6 +105,7 @@ class AuthService extends GetxController {
         final token = 'token_${DateTime.now().millisecondsSinceEpoch}';
         
         // 保存到本地存储
+        // 多个await操作按顺序执行，每个都等待前一个完成
         final prefs = await SharedPreferences.getInstance();
         await prefs.setString('auth_token', token);
         await prefs.setString('username', username);
@@ -105,15 +120,21 @@ class AuthService extends GetxController {
       }
       return false;
     } catch (e) {
+      // 异常处理 - 捕获异步操作中可能发生的任何异常
       print('注册失败: $e');
       return false;
     }
   }
   
   // 退出登录
+  // Future<void> - 异步方法，不返回具体值，只表示操作完成
+  // 用于清理用户数据和重置应用状态
   Future<void> logout() async {
     try {
+      // 获取SharedPreferences实例，用于删除本地存储的数据
       final prefs = await SharedPreferences.getInstance();
+      // 删除认证相关的本地数据
+      // remove方法返回Future<bool>，表示删除操作是否成功
       await prefs.remove('auth_token');
       await prefs.remove('username');
       
@@ -123,6 +144,7 @@ class AuthService extends GetxController {
       _username.value = '';
       _isLoggedIn.value = false;
     } catch (e) {
+      // 异常处理 - 即使删除操作失败，也要确保状态被重置
       print('退出登录失败: $e');
     }
   }

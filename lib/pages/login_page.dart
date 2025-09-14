@@ -28,6 +28,9 @@ class _LoginPageState extends State<LoginPage> {
     super.dispose();
   }
 
+  // 处理登录逻辑
+  // Future<void> - 异步方法，不返回具体值，只表示登录操作完成
+  // async关键字使方法可以执行异步操作，如网络请求、数据库操作等
   Future<void> _handleLogin() async {
     if (!_formKey.currentState!.validate()) {
       return;
@@ -38,6 +41,9 @@ class _LoginPageState extends State<LoginPage> {
     });
 
     try {
+      // await关键字等待异步操作完成
+      // _authService.login()返回Future<bool>，表示登录是否成功
+      // 这里等待登录结果，然后根据结果进行相应的UI处理
       final success = await _authService.login(
         _usernameController.text.trim(),
         _passwordController.text,
@@ -120,7 +126,7 @@ class _LoginPageState extends State<LoginPage> {
                       color: Colors.white,
                     ),
                   ),
-                  SizedBox(height: 32),
+                  SizedBox(height: 24),
                   Text(
                     '投资理财',
                     style: TextStyle(

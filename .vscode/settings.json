@@ -1,0 +1,117 @@
+{
+  // Flutter开发环境配置
+  "dart.flutterSdkPath": null, // 自动检测Flutter SDK路径
+  "dart.sdkPath": null, // 自动检测Dart SDK路径
+  // 热重载配置
+  "dart.flutterHotReloadOnSave": "all", // 保存时自动热重载
+  "dart.flutterHotRestartOnSave": "never", // 保存时不自动热重启
+  // 调试配置
+  "dart.debugExternalLibraries": false, // 不调试外部库
+  "dart.debugSdkLibraries": false, // 不调试SDK库
+  "dart.evaluateGettersInDebugViews": true, // 在调试视图中评估getter
+  "dart.allowAnalytics": false, // 禁用分析数据收集
+  // 代码格式化
+  "dart.lineLength": 120, // 代码行长度限制
+  "dart.insertArgumentPlaceholders": false, // 不插入参数占位符
+  "dart.completeFunctionCalls": true, // 自动完成函数调用
+  // 代码分析
+  "dart.analysisExcludedFolders": [
+    "build/**",
+    ".dart_tool/**",
+    "ios/**",
+    "android/**",
+    "web/**",
+    "windows/**",
+    "linux/**",
+    "macos/**"
+  ],
+  // 文件关联
+  "files.associations": {
+    "*.dart": "dart",
+    "pubspec.yaml": "yaml",
+    "analysis_options.yaml": "yaml"
+  },
+  // 编辑器配置
+  "editor.formatOnSave": true, // 保存时自动格式化
+  "editor.formatOnType": true, // 输入时自动格式化
+  "editor.rulers": [
+    120
+  ], // 显示120字符标尺
+  "editor.tabSize": 2, // Tab大小
+  "editor.insertSpaces": true, // 使用空格代替Tab
+  "editor.detectIndentation": false, // 不自动检测缩进
+  // 文件排除
+  "files.exclude": {
+    "**/.dart_tool": true,
+    "**/.packages": true,
+    "**/.pub": true,
+    "**/build": true,
+    "**/.flutter-plugins": true,
+    "**/.flutter-plugins-dependencies": true,
+    "**/.metadata": true,
+    "**/.idea": true,
+    "**/.vscode": false,
+    "**/.git": true,
+    "**/.DS_Store": true,
+    "**/Thumbs.db": true
+  },
+  // 搜索排除
+  "search.exclude": {
+    "**/.dart_tool": true,
+    "**/.packages": true,
+    "**/.pub": true,
+    "**/build": true,
+    "**/.flutter-plugins": true,
+    "**/.flutter-plugins-dependencies": true,
+    "**/.metadata": true,
+    "**/.idea": true,
+    "**/.git": true,
+    "**/.DS_Store": true,
+    "**/Thumbs.db": true
+  },
+  // 文件监视排除
+  "files.watcherExclude": {
+    "**/.dart_tool/**": true,
+    "**/.packages": true,
+    "**/.pub/**": true,
+    "**/build/**": true,
+    "**/.flutter-plugins": true,
+    "**/.flutter-plugins-dependencies": true,
+    "**/.metadata": true,
+    "**/.idea/**": true,
+    "**/.git/**": true,
+    "**/.DS_Store": true,
+    "**/Thumbs.db": true
+  },
+  // 终端配置
+  "terminal.integrated.defaultProfile.windows": "PowerShell",
+  "terminal.integrated.profiles.windows": {
+    "PowerShell": {
+      "source": "PowerShell",
+      "icon": "terminal-powershell"
+    },
+    "Command Prompt": {
+      "path": [
+        "${env:windir}\\Sysnative\\cmd.exe",
+        "${env:windir}\\System32\\cmd.exe"
+      ],
+      "args": [],
+      "icon": "terminal-cmd"
+    }
+  },
+  // 自动保存
+  "files.autoSave": "afterDelay",
+  "files.autoSaveDelay": 1000,
+  // 代码提示
+  "dart.previewFlutterUiGuides": true, // 预览Flutter UI指南
+  "dart.previewFlutterUiGuidesCustomTracking": true, // 自定义跟踪
+  "dart.closingLabels": true, // 显示闭合标签
+  "dart.flutterOutline": true, // 显示Flutter大纲
+  // 错误和警告
+  "problems.decorations.enabled": true, // 启用问题装饰
+  "problems.showCurrentInStatus": true, // 在状态栏显示当前问题
+  // 工作区设置
+  "workbench.colorTheme": "Atom One Dark",
+  "workbench.iconTheme": "vs-seti",
+  "workbench.startupEditor": "newUntitledFile"
+}

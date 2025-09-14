@@ -1,0 +1,42 @@
+{
+  "recommendations": [
+    // Flutter和Dart开发必需扩展
+    "dart-code.dart-code",
+    "dart-code.flutter",
+    // 代码质量和格式化
+    "ms-vscode.vscode-json",
+    "redhat.vscode-yaml",
+    // Git支持
+    "eamodio.gitlens",
+    // 代码片段和模板
+    "bradlc.vscode-tailwindcss",
+    // 主题和图标
+    "pkief.material-icon-theme",
+    "zhuangtongfa.material-theme",
+    // 实用工具
+    "ms-vscode.vscode-typescript-next",
+    "formulahendry.auto-rename-tag",
+    "christian-kohler.path-intellisense",
+    "ms-vscode.vscode-eslint",
+    // Flutter特定工具
+    "alexisvt.flutter-snippets",
+    "gornivv.vscode-flutter-files",
+    "robertbrunhage.flutter-riverpod-snippets",
+    // 调试和性能
+    "ms-vscode.vscode-debug-visualizer",
+    // 文档和注释
+    "aaron-bond.better-comments",
+    // 代码统计
+    "oderwat.indent-rainbow",
+    "streetsidesoftware.code-spell-checker",
+    // 项目管理
+    "ms-vscode.vscode-npm-script",
+    // 终端增强
+    "ms-vscode.powershell"
+  ],
+  "unwantedRecommendations": [
+    // 避免冲突或不必要的扩展
+    "ms-vscode.vscode-typescript",
+    "hookyqr.beautify"
+  ]
+}

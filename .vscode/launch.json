@@ -5,21 +5,99 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "name": "flutter_app",
+      "name": "Flutter",
+      "type": "dart",
       "request": "launch",
-      "type": "dart"
+      "program": "lib/main.dart"
     },
     {
-      "name": "flutter_app (profile mode)",
-      "request": "launch",
+      "name": "Flutter: Attach to Device",
       "type": "dart",
-      "flutterMode": "profile"
+      "request": "attach"
     },
     {
-      "name": "flutter_app (release mode)",
+      "name": "Attach to Chrome",
+      "port": 9222,
+      "request": "attach",
+      "type": "chrome",
+      "webRoot": "${workspaceFolder}"
+    },
+    {
+      "name": "Flutter Debug (Hot Reload)",
       "request": "launch",
       "type": "dart",
-      "flutterMode": "release"
+      "program": "lib/main.dart",
+      "args": [
+        "--enable-asserts",
+        "--enable-vm-service"
+      ],
+      "console": "debugConsole",
+      "cwd": "${workspaceFolder}",
+      "env": {
+        "FLUTTER_HOT_RELOAD": "1"
+      }
+    },
+    {
+      "name": "Flutter Profile Mode",
+      "request": "launch",
+      "type": "dart",
+      "flutterMode": "profile",
+      "program": "lib/main.dart",
+      "console": "debugConsole",
+      "cwd": "${workspaceFolder}"
+    },
+    {
+      "name": "Flutter Release Mode",
+      "request": "launch",
+      "type": "dart",
+      "flutterMode": "release",
+      "program": "lib/main.dart",
+      "console": "debugConsole",
+      "cwd": "${workspaceFolder}"
+    },
+    {
+      "name": "Flutter Web Debug",
+      "request": "launch",
+      "type": "dart",
+      "flutterMode": "debug",
+      "deviceId": "web-server",
+      "program": "lib/main.dart",
+      "args": [
+        "--web-port=3000",
+        "--web-hostname=localhost"
+      ],
+      "console": "debugConsole",
+      "cwd": "${workspaceFolder}"
+    },
+    {
+      "name": "Flutter Desktop (Windows)",
+      "request": "launch",
+      "type": "dart",
+      "flutterMode": "debug",
+      "deviceId": "windows",
+      "program": "lib/main.dart",
+      "console": "debugConsole",
+      "cwd": "${workspaceFolder}"
+    },
+    {
+      "name": "Flutter Desktop (Linux)",
+      "request": "launch",
+      "type": "dart",
+      "flutterMode": "debug",
+      "deviceId": "linux",
+      "program": "lib/main.dart",
+      "console": "debugConsole",
+      "cwd": "${workspaceFolder}"
+    },
+    {
+      "name": "Flutter Desktop (macOS)",
+      "request": "launch",
+      "type": "dart",
+      "flutterMode": "debug",
+      "deviceId": "macos",
+      "program": "lib/main.dart",
+      "console": "debugConsole",
+      "cwd": "${workspaceFolder}"
     }
   ]
 }
