@@ -17,7 +17,7 @@ class _LoginPageState extends State<LoginPage> {
   // 如果AuthService已经存在，则返回现有实例；否则创建新实例
   // 这里用于获取认证服务实例来处理登录逻辑
   final AuthService _authService = Get.put(AuthService());
-  
+
   bool _isLoading = false;
   bool _obscurePassword = true;
 
@@ -44,16 +44,13 @@ class _LoginPageState extends State<LoginPage> {
       // await关键字等待异步操作完成
       // _authService.login()返回Future<bool>，表示登录是否成功
       // 这里等待登录结果，然后根据结果进行相应的UI处理
-      final success = await _authService.login(
-        _usernameController.text.trim(),
-        _passwordController.text,
-      );
+      final success = await _authService.login(_usernameController.text.trim(), _passwordController.text);
 
       if (success) {
         // Get.offAll() - 导航到新页面并清除所有之前的页面
         // 相当于Navigator.pushAndRemoveUntil，确保用户无法返回到登录页面
         Get.offAll(() => MainLayout());
-        
+
         // Get.snackbar() - 显示底部消息提示
         // 比Flutter原生的SnackBar更简单易用，支持更多自定义选项
         Get.snackbar(
@@ -99,10 +96,7 @@ class _LoginPageState extends State<LoginPage> {
           gradient: LinearGradient(
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
-            colors: [
-              Colors.blue.shade600,
-              Colors.blue.shade800,
-            ],
+            colors: [Colors.blue.shade600, Colors.blue.shade800],
           ),
         ),
         child: SafeArea(
@@ -116,35 +110,18 @@ class _LoginPageState extends State<LoginPage> {
                   Container(
                     width: 120,
                     height: 120,
-                    decoration: BoxDecoration(
-                      color: Colors.white.withOpacity(0.2),
-                      shape: BoxShape.circle,
-                    ),
-                    child: Icon(
-                      Icons.trending_up,
-                      size: 60,
-                      color: Colors.white,
-                    ),
+                    decoration: BoxDecoration(color: Colors.white.withOpacity(0.2), shape: BoxShape.circle),
+                    child: Icon(Icons.trending_up, size: 60, color: Colors.white),
                   ),
                   SizedBox(height: 24),
                   Text(
                     '投资理财',
-                    style: TextStyle(
-                      fontSize: 32,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.white,
-                    ),
+                    style: TextStyle(fontSize: 32, fontWeight: FontWeight.bold, color: Colors.white),
                   ),
                   SizedBox(height: 8),
-                  Text(
-                    '让财富增值，让生活更美好',
-                    style: TextStyle(
-                      fontSize: 16,
-                      color: Colors.white.withOpacity(0.8),
-                    ),
-                  ),
+                  Text('让财富增值，让生活更美好', style: TextStyle(fontSize: 16, color: Colors.white.withOpacity(0.8))),
                   SizedBox(height: 48),
-                  
+
                   // 登录表单
                   Container(
                     padding: EdgeInsets.all(24),
@@ -152,11 +129,7 @@ class _LoginPageState extends State<LoginPage> {
                       color: Colors.white,
                       borderRadius: BorderRadius.circular(16),
                       boxShadow: [
-                        BoxShadow(
-                          color: Colors.black.withOpacity(0.1),
-                          blurRadius: 20,
-                          offset: Offset(0, 10),
-                        ),
+                        BoxShadow(color: Colors.black.withOpacity(0.1), blurRadius: 20, offset: Offset(0, 10)),
                       ],
                     ),
                     child: Form(
@@ -166,24 +139,18 @@ class _LoginPageState extends State<LoginPage> {
                         children: [
                           Text(
                             '登录账户',
-                            style: TextStyle(
-                              fontSize: 24,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.grey.shade800,
-                            ),
+                            style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: Colors.grey.shade800),
                             textAlign: TextAlign.center,
                           ),
                           SizedBox(height: 32),
-                          
+
                           // 用户名输入框
                           TextFormField(
                             controller: _usernameController,
                             decoration: InputDecoration(
                               labelText: '用户名',
                               prefixIcon: Icon(Icons.person_outline),
-                              border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(12),
-                              ),
+                              border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
                               focusedBorder: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(12),
                                 borderSide: BorderSide(color: Colors.blue),
@@ -197,7 +164,7 @@ class _LoginPageState extends State<LoginPage> {
                             },
                           ),
                           SizedBox(height: 16),
-                          
+
                           // 密码输入框
                           TextFormField(
                             controller: _passwordController,
@@ -206,20 +173,14 @@ class _LoginPageState extends State<LoginPage> {
                               labelText: '密码',
                               prefixIcon: Icon(Icons.lock_outline),
                               suffixIcon: IconButton(
-                                icon: Icon(
-                                  _obscurePassword
-                                      ? Icons.visibility_off
-                                      : Icons.visibility,
-                                ),
+                                icon: Icon(_obscurePassword ? Icons.visibility_off : Icons.visibility),
                                 onPressed: () {
                                   setState(() {
                                     _obscurePassword = !_obscurePassword;
                                   });
                                 },
                               ),
-                              border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(12),
-                              ),
+                              border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
                               focusedBorder: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(12),
                                 borderSide: BorderSide(color: Colors.blue),
@@ -236,7 +197,7 @@ class _LoginPageState extends State<LoginPage> {
                             },
                           ),
                           SizedBox(height: 24),
-                          
+
                           // 登录按钮
                           ElevatedButton(
                             onPressed: _isLoading ? null : _handleLogin,
@@ -244,9 +205,7 @@ class _LoginPageState extends State<LoginPage> {
                               backgroundColor: Colors.blue.shade600,
                               foregroundColor: Colors.white,
                               padding: EdgeInsets.symmetric(vertical: 16),
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(12),
-                              ),
+                              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
                               elevation: 0,
                             ),
                             child: _isLoading
@@ -255,31 +214,18 @@ class _LoginPageState extends State<LoginPage> {
                                     width: 20,
                                     child: CircularProgressIndicator(
                                       strokeWidth: 2,
-                                      valueColor: AlwaysStoppedAnimation<Color>(
-                                        Colors.white,
-                                      ),
+                                      valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
                                     ),
                                   )
-                                : Text(
-                                    '登录',
-                                    style: TextStyle(
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.w600,
-                                    ),
-                                  ),
+                                : Text('登录', style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600)),
                           ),
                           SizedBox(height: 16),
-                          
+
                           // 注册链接
                           Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              Text(
-                                '还没有账户？',
-                                style: TextStyle(
-                                  color: Colors.grey.shade600,
-                                ),
-                              ),
+                              Text('还没有账户？', style: TextStyle(color: Colors.grey.shade600)),
                               TextButton(
                                 onPressed: () {
                                   // Get.to() - 导航到新页面
@@ -288,10 +234,7 @@ class _LoginPageState extends State<LoginPage> {
                                 },
                                 child: Text(
                                   '立即注册',
-                                  style: TextStyle(
-                                    color: Colors.blue.shade600,
-                                    fontWeight: FontWeight.w600,
-                                  ),
+                                  style: TextStyle(color: Colors.blue.shade600, fontWeight: FontWeight.w600),
                                 ),
                               ),
                             ],
